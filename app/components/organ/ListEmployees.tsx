@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 
+
 interface DataEmployee {
     id: number;
     name: string;
@@ -12,6 +13,7 @@ interface DataEmployee {
   }
 
 const ListEmployees = () => {
+
     const [employees, setEmployee] = useState<DataEmployee[]>([])
     const confirmDelete = () => alert ("Are You Sure?")
 
@@ -86,14 +88,16 @@ const ListEmployees = () => {
                         </span>
                         </td>
                         <td className="whitespace-nowrap flex space-around gap-1 px-4 py-2 font-medium text-gray-900 border-b border-sky-500">
-                        <Link
-                            href={`pages/edits/${employee.id}`}
+                        <Link href={`/pages/edits/${employee.id}`}
                             className="inline-block rounded-lg bg-sky-300 px-4 py-2 text-xs font-medium text-sky-700 hover:bg-gray-200 transition-all"
-                        >Edit
+                            style={{ cursor: 'not-allowed' }}
+                            >
+                            Edit
                         </Link>
                         <button
                             onClick={confirmDelete}
-                            className="inline-block rounded-lg bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-400 transition-all"
+                            className="inline-block rounded-lg bg-gray-500 px-4 py-2 text-xs font-medium text-white transition-all"
+                            disabled
                         >X
                         </button>
                         </td>
