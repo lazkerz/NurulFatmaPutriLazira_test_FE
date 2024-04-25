@@ -4,9 +4,10 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 const baseURL = 'http://localhost:8000';
 
 // Buat instance axios dengan baseURL yang telah ditentukan
-const api = axios.create({
+export const api = axios.create({
   baseURL: baseURL,
 });
+
 
 // Definisikan tipe data untuk payload karyawan
 interface EmployeePayload {

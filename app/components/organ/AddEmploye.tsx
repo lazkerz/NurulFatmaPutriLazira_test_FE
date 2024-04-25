@@ -3,13 +3,13 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../GlobalRedux/store";
-// import { addEmployee, addEmployeeAsync } from "../GlobalRedux/Features/employee/employeeSlice";
-import { addEmployee } from '../../GlobalRedux/Features/employee/employeeService'
+// import { addEmployee } from '../../GlobalRedux/Features/employee/employeeService'
+import { addEmployeeAsync } from "@/app/GlobalRedux/Features/employee/employeeSlice";
 import EmployeeForm from "../mollecul/EmployeeForm";
 import Button from "../atom/Button";
 import Swal from 'sweetalert2';
 
-  
+
 const AddEmployee: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -23,7 +23,10 @@ const AddEmployee: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await addEmployee(formData);
+      // Dispatch async thunk untuk menambahkan karyawan
+      await dispatch(addEmployeeAsync(formData));
+      
+      // Reset form setelah berhasil menambahkan karyawan
       setFormData({
         name: '',
         joinDate: new Date(),
@@ -32,6 +35,7 @@ const AddEmployee: React.FC = () => {
         status: false,
       });
 
+      // Tampilkan notifikasi sukses
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -43,6 +47,7 @@ const AddEmployee: React.FC = () => {
         }
       });
     } catch (error) {
+      // Tangani kesalahan jika terjadi
       console.error('Error:', error);
     }
   };
@@ -50,10 +55,10 @@ const AddEmployee: React.FC = () => {
   return (
     <>
       <h1 className="text-3xl font-semibold text-sky-500 mx-10 my-5">Add Employee</h1>
-      <form method="post" onSubmit={handleSubmit} className="mx-10">
+      <form onSubmit={handleSubmit} className="mx-10">
         <div className="space-y-6">
-            <EmployeeForm formData={formData} setFormData={setFormData} />
-            <Button>Add</Button>
+          <EmployeeForm formData={formData} setFormData={setFormData} />
+          <Button type="submit">Add</Button> {/* Ganti <Button> menjadi tombol submit */}
         </div>
       </form>
     </>

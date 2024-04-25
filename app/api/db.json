@@ -17,19 +17,11 @@
       "status": true
     },
     {
-      "id": "74aa",
-      "name": "Lisa",
-      "joinDate": "2024-04-25T13:11:49.315Z",
-      "job": "Frontdesk",
-      "shift": "Shift 03",
-      "status": true
-    },
-    {
-      "id": "e517",
-      "name": "Dina",
-      "joinDate": "2024-04-25T13:24:23.880Z",
-      "job": "Admin Inventory",
-      "shift": "Shift 01",
+      "id": "08ef",
+      "name": "Yuli",
+      "joinDate": "2024-04-25T16:30:01.003Z",
+      "job": "Nurse",
+      "shift": "Shift 02",
       "status": true
     }
   ]
