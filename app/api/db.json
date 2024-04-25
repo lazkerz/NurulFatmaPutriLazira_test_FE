@@ -1,0 +1,36 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "joinDate": "2024-04-25",
+      "job": "Frontend Developer",
+      "shift": "Shift 01",
+      "status": true
+    },
+    {
+      "id": "9462",
+      "name": "laras",
+      "joinDate": "2024-04-25T09:46:48.909Z",
+      "job": "Marketing",
+      "shift": "Shift 01",
+      "status": true
+    },
+    {
+      "id": "74aa",
+      "name": "Lisa",
+      "joinDate": "2024-04-25T13:11:49.315Z",
+      "job": "Frontdesk",
+      "shift": "Shift 03",
+      "status": true
+    },
+    {
+      "id": "e517",
+      "name": "Dina",
+      "joinDate": "2024-04-25T13:24:23.880Z",
+      "job": "Admin Inventory",
+      "shift": "Shift 01",
+      "status": true
+    }
+  ]
+}
