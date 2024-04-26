@@ -1,14 +1,6 @@
 {
   "employees": [
     {
-      "id": "1",
-      "name": "John Doe",
-      "joinDate": "2024-04-25",
-      "job": "Frondesk",
-      "shift": "Shift 01",
-      "status": true
-    },
-    {
       "0": {
         "id": "9462",
         "name": "laras",

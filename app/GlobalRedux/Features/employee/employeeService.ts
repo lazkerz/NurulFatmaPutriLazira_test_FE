@@ -61,8 +61,8 @@ export const updateEmployeeById = async (id: string, newData: Partial<EmployeePa
 export const deleteEmployee = async (id: string): Promise<void> => {
   try {
     // Kirim permintaan DELETE ke endpoint /employees
-    const response = await api.delete(`/employees?id=${id}`);
-    console.log('Response:', response.data);
+    await api.delete(`/employees/${id}`);
+    console.log('Employee deleted successfully');
   } catch (error) {
     // Tangani kesalahan jika terjadi
     if (axios.isAxiosError(error)) {

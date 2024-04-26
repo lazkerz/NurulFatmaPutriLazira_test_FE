@@ -55,6 +55,13 @@ export const employeeSlice = createSlice({
         if (updatedEmployeeIndex !== -1) {
           state[updatedEmployeeIndex] = { ...state[updatedEmployeeIndex], ...action.payload };
         }
+      })
+      .addCase(deleteEmployeeByIdAsync.fulfilled, (state, action) => {
+          // Menghapus karyawan dari state berdasarkan ID yang diberikan
+          const indexToDelete = state.findIndex(employee => employee.id === action.payload);
+          if (indexToDelete !== -1) {
+            state.splice(indexToDelete, 1);
+          }
       });
   },
 })
