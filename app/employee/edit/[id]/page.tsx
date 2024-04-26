@@ -8,6 +8,8 @@ import Button from "@/app/components/atom/Button";
 import Swal from "sweetalert2";
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
+import Link from "next/link";
+import { SlArrowLeft } from "react-icons/sl";
 
 
 interface DataEmployee {
@@ -59,8 +61,9 @@ const EmployeesId = ({ params } : {
     const handleViewDetails = (id: string, employees: any[]) => {
       const employee = employees.find((employee) => employee.id === id);
       if (employee) {
+        
         setSelectedEmployee(employee);
-        const formattedJoinDate = format(new Date(employee.joinDate), 'dd/MM/yyyy');
+        const formattedJoinDate = format(new Date(employee.joinDate), 'yyyy-MM-dd');
         setFormData({
           name: employee.name,
           joinDate: new Date(formattedJoinDate),
@@ -104,7 +107,12 @@ const EmployeesId = ({ params } : {
 
     return(
         <>
-        <h1 className="text-3xl font-semibold text-sky-500 mx-10 my-5">Update Employee</h1>
+        <div className="flex justify-left gap-5 mx-10 my-5">
+          <Link href="/employee" className="bg-gray-300 hover:bg-gray-400 px-3 py-3 rounded-full text-gray-800 text-sm font-medium transition-all">
+              <SlArrowLeft />
+          </Link>
+          <h1 className="text-3xl font-semibold text-sky-500">Add Employee</h1>
+        </div>
         <form method="post" onSubmit={handleSubmit} className="mx-10">
             <div className="space-y-6">
             <EmployeeForm formData={formData} setFormData={setFormData} />

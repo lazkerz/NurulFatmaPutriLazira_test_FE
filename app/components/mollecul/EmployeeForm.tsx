@@ -19,6 +19,7 @@ interface FormData {
 }
 
 const EmployeeForm: React.FC<EmployeeFormProps> = ({ formData, setFormData }) => {
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     const newValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
@@ -27,6 +28,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ formData, setFormData }) =>
       [name]: type === 'date' ? new Date(value) : newValue
     }));
   };
+  
 
   return (
     <>

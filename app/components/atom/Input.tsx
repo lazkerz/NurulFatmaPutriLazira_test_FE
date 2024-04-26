@@ -23,7 +23,7 @@ const Input: React.FC<InputProps> = ({ label, type, name, value, onChange, place
         name={name}
         className="mt-1 w-full max-w-[55vw] p-2 text-gray-500 rounded-md border border-gray-500 shadow-sm sm:text-sm"
         required={required}
-        value={inputValue} // Gunakan inputValue
+        value={inputValue} 
         onChange={onChange}
       />
     </div>

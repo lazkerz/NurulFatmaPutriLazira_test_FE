@@ -8,7 +8,6 @@ export const api = axios.create({
   baseURL: baseURL,
 });
 
-
 // Definisikan tipe data untuk payload karyawan
 interface EmployeePayload {
   name: string;

@@ -60,7 +60,7 @@ const ListEmployees = () => {
                 timer: 1000,
                 didClose: () => {
                   // Redirect to employee table page
-                  window.location.href = '/pages';
+                  window.location.href = '/employee';
                 },
               });
             } else {
@@ -136,7 +136,7 @@ const ListEmployees = () => {
                         </span>
                         </td>
                         <td className="whitespace-nowrap flex space-around gap-1 px-4 py-2 font-medium text-gray-900 border-b border-sky-500">
-                        <Link href={`/pages/employee/${employee.id}`}
+                        <Link href={`/employee/edit/${employee.id}`}
                             className="inline-block rounded-lg bg-sky-300 px-4 py-2 text-xs font-medium text-sky-700 hover:bg-gray-200 transition-all"
 
                             >

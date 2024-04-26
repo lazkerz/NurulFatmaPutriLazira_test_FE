@@ -1,4 +1,3 @@
-'user client';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addEmployee as addEmployeeService, updateEmployeeById as updateEmployeeService, deleteEmployee as deleteEmployeeService} from './employeeService';
 

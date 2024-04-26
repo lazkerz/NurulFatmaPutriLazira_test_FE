@@ -63,7 +63,6 @@ const AddEmployee: React.FC = () => {
 
   return (
     <>
-      <h1 className="text-3xl font-semibold text-sky-500 mx-10 my-5">Add Employee</h1>
       <form onSubmit={handleSubmit} className="mx-10">
         <div className="space-y-6">
           <EmployeeForm formData={formData} setFormData={setFormData} />
