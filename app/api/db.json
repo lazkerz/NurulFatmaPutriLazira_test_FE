@@ -27,8 +27,8 @@
       },
       "name": "Yuli",
       "joinDate": "2024-04-26T00:00:00.000Z",
-      "job": "Admin Inventory",
-      "shift": "Shift 02",
+      "job": "Doctor",
+      "shift": "Shift 01",
       "status": true,
       "id": "08ef"
     },
@@ -58,7 +58,7 @@
         "status": true
       },
       "name": "Nina",
-      "joinDate": "2024-04-26T00:00:00.000Z",
+      "joinDate": "2024-04-25T00:00:00.000Z",
       "job": "Admin Accounting",
       "shift": "Shift 01",
       "status": true,

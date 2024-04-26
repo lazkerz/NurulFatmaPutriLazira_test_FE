@@ -7,6 +7,7 @@ import { AppDispatch } from '@/app/GlobalRedux/store';
 import Button from "@/app/components/atom/Button";
 import Swal from "sweetalert2";
 import { useDispatch } from 'react-redux';
+import { format } from 'date-fns';
 
 
 interface DataEmployee {
@@ -59,9 +60,10 @@ const EmployeesId = ({ params } : {
       const employee = employees.find((employee) => employee.id === id);
       if (employee) {
         setSelectedEmployee(employee);
+        const formattedJoinDate = format(new Date(employee.joinDate), 'dd/MM/yyyy');
         setFormData({
           name: employee.name,
-          joinDate: employee.joinDate,
+          joinDate: new Date(formattedJoinDate),
           job: employee.job,
           shift: employee.shift,
           status: employee.status,
