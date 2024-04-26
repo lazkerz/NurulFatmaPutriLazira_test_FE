@@ -1,22 +1,18 @@
 'user client';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addEmployee as addEmployeeService} from './employeeService';
+import { addEmployee as addEmployeeService, updateEmployeeById as updateEmployeeService, deleteEmployee as deleteEmployeeService} from './employeeService';
 
 interface EmployeeState {
   name: string;
   joinDate: Date;
   job: string;
   shift: string;
-  status: boolean;
+  status: boolean
+  id?: string;
 }
 
-const initialState: EmployeeState = {
-  name: "",
-  joinDate: new Date(),
-  job: "",
-  shift: "",
-  status: true,
-}
+
+const initialState: EmployeeState[] = [];
 
 export const addEmployeeAsync = createAsyncThunk<any, EmployeeState>(
   'employee/addEmployee',
@@ -25,31 +21,41 @@ export const addEmployeeAsync = createAsyncThunk<any, EmployeeState>(
   }
 );
 
-// export const updateEmployeeByIdAsync = createAsyncThunk<any, {id: number, newData: Partial<EmployeeState>}>(
-//   'employee/updateEmployeeById',
-//   async ({id, newData}: {id: number, newData: Partial<EmployeeState>}) => {
-//     return updateEmployeeService(id, newData);
-//   }
-// );
+export const updateEmployeeByIdAsync = createAsyncThunk<any, {id: string, newData: Partial<EmployeeState>}>(
+  'employee/updateEmployeeById',
+  async ({id, newData}: {id: string, newData: Partial<EmployeeState>}) => {
+    // Memanggil updateEmployeeService dan menangani respons
+    const updatedEmployee = await updateEmployeeService(id, newData);
+    // Mengembalikan data karyawan yang telah diperbarui
+    return updatedEmployee;
+  }
+);
+
+
+export const deleteEmployeeByIdAsync = createAsyncThunk<any, string>(
+  'employee/deleteEmployeeById',
+  async (id: string) => {
+    return deleteEmployeeService(id);
+  }
+);
+
 
 export const employeeSlice = createSlice({
   name: 'employee',
   initialState,
   reducers: {
-    // Tidak diperlukan lagi karena kita menggunakan createAsyncThunk
   },
   extraReducers: (builder) => {
     builder
       .addCase(addEmployeeAsync.fulfilled, (state, action) => {
-        // Memperbarui state dengan data baru setelah berhasil menambahkan karyawan
-        // Pastikan respons dari addEmployeeService sesuai dengan struktur EmployeeState
-        state = action.payload;
+        state.push(action.payload); // Menambahkan karyawan baru ke state
       })
-    //   .addCase(updateEmployeeByIdAsync.fulfilled, (state, action) => {
-    //     // Memperbarui state dengan data baru setelah berhasil memperbarui karyawan
-    //     // Pastikan respons dari updateEmployeeService sesuai dengan struktur EmployeeState
-    //     state = action.payload;
-    //   });
+      .addCase(updateEmployeeByIdAsync.fulfilled, (state, action) => {
+        const updatedEmployeeIndex = state.findIndex(employee => employee.id === action.payload.id);
+        if (updatedEmployeeIndex !== -1) {
+          state[updatedEmployeeIndex] = { ...state[updatedEmployeeIndex], ...action.payload };
+        }
+      });
   },
 })
 

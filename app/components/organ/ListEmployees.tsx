@@ -1,7 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { AppDispatch } from "@/app/GlobalRedux/store";
+import { deleteEmployeeByIdAsync } from "@/app/GlobalRedux/Features/employee/employeeSlice";
+import Swal from "sweetalert2";
 import Link from "next/link"
+import { useDispatch } from "react-redux";
 
 
 interface DataEmployee {
@@ -13,9 +17,9 @@ interface DataEmployee {
   }
 
 const ListEmployees = () => {
+    const dispatch: AppDispatch = useDispatch();
 
     const [employees, setEmployee] = useState<DataEmployee[]>([])
-    const confirmDelete = () => alert ("Are You Sure?")
 
     useEffect(() => {
         const fetchData = async() => {
@@ -33,6 +37,50 @@ const ListEmployees = () => {
         fetchData();
     }, []);
 
+    const handleDelete = async (id: number) => {
+        const confirmation = await Swal.fire({
+          title: 'Are you sure?',
+          text: 'You will not be able to recover this employee data!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!',
+        });
+    
+        if (confirmation.isConfirmed) {
+          try {
+            const result = await dispatch(deleteEmployeeByIdAsync(id.toString()));
+            if (result.meta.requestStatus === 'fulfilled') {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Employee data has been deleted successfully!',
+                showConfirmButton: false,
+                timer: 1000,
+                didClose: () => {
+                  // Redirect to employee table page
+                  window.location.href = '/pages';
+                },
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Failed',
+                text: 'Failed to delete employee data!',
+              });
+            }
+          } catch (error) {
+            console.error("Error deleting employee:", error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to delete employee data!',
+            });
+          }
+        }
+      };
+    
     return(
         <div className="overflow-x-auto">
             <table id="my-datatable" className="text-sm w-full rounded-lg">
@@ -88,17 +136,16 @@ const ListEmployees = () => {
                         </span>
                         </td>
                         <td className="whitespace-nowrap flex space-around gap-1 px-4 py-2 font-medium text-gray-900 border-b border-sky-500">
-                        <Link href={`/pages/edits/${employee.id}`}
+                        <Link href={`/pages/employee/${employee.id}`}
                             className="inline-block rounded-lg bg-sky-300 px-4 py-2 text-xs font-medium text-sky-700 hover:bg-gray-200 transition-all"
-                            style={{ cursor: 'not-allowed' }}
+
                             >
                             Edit
                         </Link>
                         <button
-                            onClick={confirmDelete}
-                            className="inline-block rounded-lg bg-gray-500 px-4 py-2 text-xs font-medium text-white transition-all"
-                            disabled
-                        >X
+                            onClick={() => handleDelete(employee.id)}
+                            className="inline-block rounded-lg bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-300 transition-all"
+                        >Delete
                         </button>
                         </td>
                     </tr>

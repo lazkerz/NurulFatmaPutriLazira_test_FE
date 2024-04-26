@@ -43,7 +43,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ formData, setFormData }) =>
         label="Join Date"
         type="date"
         name="joinDate"
-        value={formData.joinDate.toISOString().split('T')[0]}
+        value={formData.joinDate}
         onChange={handleChange}
         placeholder="Join Date"
         required

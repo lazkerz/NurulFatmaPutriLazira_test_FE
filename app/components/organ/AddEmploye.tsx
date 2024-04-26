@@ -17,14 +17,14 @@ const AddEmployee: React.FC = () => {
     joinDate: new Date(),
     job: '',
     shift: '',
-    status: false,
+    status: true,
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       // Dispatch async thunk untuk menambahkan karyawan
-      await dispatch(addEmployeeAsync(formData));
+      const result = await dispatch(addEmployeeAsync(formData));
       
       // Reset form setelah berhasil menambahkan karyawan
       setFormData({
@@ -32,20 +32,29 @@ const AddEmployee: React.FC = () => {
         joinDate: new Date(),
         job: '',
         shift: '',
-        status: false,
+        status: true,
       });
 
       // Tampilkan notifikasi sukses
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: 'Employee data has been added successfully!',
-        showConfirmButton: false,
-        timer: 1000,
-        didClose: () => {
-          window.location.href = ''; // Redirect to employee table page
-        }
-      });
+      if(result.meta.requestStatus === 'fulfilled'){
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Employee data has been updated successfully!',
+          showConfirmButton: false,
+          timer: 1000,
+          didClose: () => {
+            window.location.href = '/pages'; // Redirect to employee table page
+          }
+        });
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          text: 'Failed to update employee data!',
+        });
+      }
+      
     } catch (error) {
       // Tangani kesalahan jika terjadi
       console.error('Error:', error);
@@ -58,7 +67,7 @@ const AddEmployee: React.FC = () => {
       <form onSubmit={handleSubmit} className="mx-10">
         <div className="space-y-6">
           <EmployeeForm formData={formData} setFormData={setFormData} />
-          <Button type="submit">Add</Button> {/* Ganti <Button> menjadi tombol submit */}
+          <Button type="submit">Add</Button>
         </div>
       </form>
     </>
