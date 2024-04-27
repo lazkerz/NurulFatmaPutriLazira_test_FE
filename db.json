@@ -45,7 +45,7 @@
       "joinDate": "2024-04-26T00:00:00.000Z",
       "job": "Admin Accounting",
       "shift": "Shift 01",
-      "status": true,
+      "status": false,
       "id": "94ea"
     },
     {

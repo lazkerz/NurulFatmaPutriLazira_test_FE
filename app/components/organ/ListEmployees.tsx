@@ -13,7 +13,8 @@ interface DataEmployee {
     name: string;
     joinDate: Date;
     job: string;
-    shift: string;
+    shift: string
+    status: boolean;
   }
 
 const ListEmployees = () => {
@@ -101,6 +102,9 @@ const ListEmployees = () => {
                         <th className="whitespace-nowrap px-4 py-2 font-medium text-white w-20">
                             <span className="block text-left">Shift</span>
                         </th>
+                        <th className="whitespace-nowrap px-4 py-2 font-medium text-white w-20">
+                            <span className="block text-left">Status</span>
+                        </th>
                         <th className="whitespace-nowrap px-4 py-2 font-medium text-white w-10">
                             <span className="block text-left">Action</span>
                         </th>
@@ -133,6 +137,11 @@ const ListEmployees = () => {
                         <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 border-b border-sky-500">
                             <span className="block text-left text-gray-600">
                         {employee.shift}
+                        </span>
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 border-b border-sky-500">
+                            <span className="block text-left text-gray-600">
+                        {employee.status ? "Active" : "Inactive"}
                         </span>
                         </td>
                         <td className="whitespace-nowrap flex space-around gap-1 px-4 py-2 font-medium text-gray-900 border-b border-sky-500">

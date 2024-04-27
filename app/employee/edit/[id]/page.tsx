@@ -90,7 +90,7 @@ const EmployeesId = ({ params } : {
               showConfirmButton: false,
               timer: 1000,
               didClose: () => {
-                window.location.href = '/pages'; // Redirect to employee table page
+                window.location.href = '/employee'; // Redirect to employee table page
               }
             });
           }else{
