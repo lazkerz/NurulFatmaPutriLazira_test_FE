@@ -30,7 +30,6 @@ export const updateEmployeeByIdAsync = createAsyncThunk<any, {id: string, newDat
   }
 );
 
-
 export const deleteEmployeeByIdAsync = createAsyncThunk<any, string>(
   'employee/deleteEmployeeById',
   async (id: string) => {
